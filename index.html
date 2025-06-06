@@ -3,7 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <title>فروشگاه دیوار ساده</title>
+  <meta name="google-site-verification" content="google8f221851c93319b4.htm">
+  <meta name="description" content="سایت دیوار ساده برای ثبت آگهی و خرید و فروش در شهرهای کابل، بلخ و هرات. آگهی خود را به آسانی ثبت کنید.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
+
   <style>
     body {
       font-family: sans-serif;
@@ -114,6 +118,31 @@
     </div>
   </div>
 
-  <script src="script.js"></script>
+  <script>
+    const postAdBtn = document.getElementById("postAdBtn");
+    const modal = document.getElementById("phoneModal");
+
+    postAdBtn.onclick = function () {
+      modal.style.display = "block";
+    }
+
+    function closeModal() {
+      modal.style.display = "none";
+    }
+
+    function submitPhone() {
+      const phone = document.getElementById("phoneNumber").value;
+      if (phone.length >= 10) {
+        window.location.href = "ads.html";
+      } else {
+        alert("لطفاً شماره معتبر وارد کنید.");
+      }
+    }
+
+    function selectCity(city) {
+      alert("شهر انتخاب شده: " + city);
+      // می‌تونی بعداً شهر رو به صورت localStorage ذخیره کنی
+    }
+  </script>
 </body>
 </html>
