@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>آگهی‌ها</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 20px;
+      background: #f5f5f5;
+    }
+    header {
+      margin-bottom: 20px;
+    }
+    .filters {
+      background: #fff;
+      border: 1px solid #ccc;
+      padding: 15px;
+      margin-bottom: 20px;
+      border-radius: 8px;
+    }
+    .category, .subcategory {
+      margin: 8px 0;
+      cursor: pointer;
+      display: inline-block;
+      padding: 5px 10px;
+      border-radius: 5px;
+    }
+    .category:hover, .subcategory:hover {
+      background-color: #eee;
+    }
+    .category {
+      font-weight: bold;
+      color: #d22;
+    }
+    .subcategory {
+      margin-right: 15px;
+      color: #444;
+    }
+    .ads {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .ad-card {
+      background: #fff;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>آگهی‌ها</h1>
+  </header>
+
+  <!-- فیلتر دسته‌بندی -->
+  <section class="filters">
+    <div class="category" onclick="filterCategory('digital')">کالای دیجیتال</div>
+    <div class="subcategory" onclick="filterSub('mobile')">موبایل</div>
+    <div class="subcategory" onclick="filterSub('tablet')">تبلت</div>
+    <div class="subcategory" onclick="filterSub('laptop')">لپ‌تاپ</div>
+    <div class="subcategory" onclick="filterSub('desktop')">دسکتاپ</div>
+
+    <div class="category" onclick="filterCategory('jobs')">استخدام و کاریابی</div>
+    <div class="subcategory" onclick="filterSub('service')">خدمات</div>
+    <div class="subcategory" onclick="filterSub('restaurant')">فروشگاه و رستوران</div>
+    <div class="subcategory" onclick="filterSub('marketing')">بازاریابی و فروش</div>
+    <div class="subcategory" onclick="filterSub('education')">آموزشی</div>
+
+    <div class="category" onclick="showAll()">نمایش همه</div>
+  </section>
+
+  <main>
+    <div class="ads">
+      <!-- آگهی‌ها -->
+      <div class="ad-card digital mobile">📱 فروش موبایل سامسونگ - ۱۰,۰۰۰ افغانی</div>
+      <div class="ad-card digital laptop">💻 لپ‌تاپ استوک - ۱۵,۰۰۰ افغانی</div>
+      <div class="ad-card digital desktop">🖥 دسکتاپ گیمینگ - ۲۰,۰۰۰ افغانی</div>
+      <div class="ad-card digital tablet">📱 آیپد نسل ۷ - ۱۶,۰۰۰ افغانی</div>
+      
+      <div class="ad-card jobs marketing">🧑‍💼 استخدام بازاریاب در کابل</div>
+      <div class="ad-card jobs restaurant">🍽 استخدام صندوق‌دار برای رستوران</div>
+      <div class="ad-card jobs service">🛠 خدمات برق‌کاری در محل</div>
+      <div class="ad-card jobs education">📚 استخدام استاد انگلیسی</div>
+    </div>
+  </main>
+
+  <script>
+    function filterCategory(cat) {
+      const cards = document.querySelectorAll('.ad-card');
+      cards.forEach(card => {
+        if (card.classList.contains(cat)) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    function filterSub(sub) {
+      const cards = document.querySelectorAll('.ad-card');
+      cards.forEach(card => {
+        if (card.classList.contains(sub)) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    function showAll() {
+      const cards = document.querySelectorAll('.ad-card');
+      cards.forEach(card => {
+        card.style.display = 'block';
+      });
+    }
+  </script>
+</body>
+</html>

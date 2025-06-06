@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>فروشگاه دیوار ساده</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 0;
+      padding: 0;
+      background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1950&q=80');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      color: #fff;
+      backdrop-filter: brightness(0.95);
+    }
+
+    header {
+      background: rgba(0, 0, 0, 0.6);
+      padding: 15px;
+      text-align: center;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 2em;
+    }
+
+    nav {
+      margin-top: 10px;
+    }
+
+    button {
+      padding: 10px 20px;
+      margin: 10px;
+      font-size: 1em;
+      border: none;
+      border-radius: 5px;
+      background-color: #ff5252;
+      color: white;
+      cursor: pointer;
+    }
+
+    .cities {
+      text-align: center;
+      margin-top: 50px;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 999;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.6);
+    }
+
+    .modal-content {
+      background-color: #fff;
+      color: black;
+      margin: 15% auto;
+      padding: 20px;
+      border-radius: 10px;
+      width: 80%;
+      max-width: 400px;
+      text-align: center;
+    }
+
+    .close {
+      float: left;
+      font-size: 28px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    input {
+      padding: 10px;
+      width: 90%;
+      margin-top: 15px;
+      font-size: 1em;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>دیوار</h1>
+    <nav>
+      <button id="postAdBtn">ثبت آگهی</button>
+    </nav>
+  </header>
+
+  <main>
+    <p style="text-align: center;">لطفا شهر خود را انتخاب کنید:</p>
+    <div class="cities">
+      <button onclick="selectCity('کابل')">کابل</button>
+      <button onclick="selectCity('بلخ')">بلخ</button>
+      <button onclick="selectCity('هرات')">هرات</button>
+    </div>
+  </main>
+
+  <!-- مودال شماره تلفن -->
+  <div id="phoneModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <h2>لطفاً شماره تلفن خود را وارد کنید</h2>
+      <input type="text" id="phoneNumber" placeholder="مثلاً 09351234567">
+      <button onclick="submitPhone()">ادامه</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
