@@ -1,184 +1,201 @@
+<!-- index.html -->
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
   <meta charset="UTF-8">
-  <title>فروشگاه دیوار ساده</title>
-  <meta name="google-site-verification" content="dQfLfNqJ-BvcwCEXscJ5jbSVnt9V7G5ORYkjX1SpazU" />
-  <meta name="description" content="سایت دیوار ساده برای ثبت آگهی و خرید و فروش در شهرهای کابل، بلخ و هرات. آگهی خود را به آسانی ثبت کنید.">
+  <title>فروشگاه خرید و فروش</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
-
   <style>
     body {
-      font-family: sans-serif;
       margin: 0;
-      padding: 0;
-      background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1950&q=80');
-      background-size: cover;
-      background-position: center;
-      background-attachment: fixed;
-      color: #fff;
-      backdrop-filter: brightness(0.95);
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
+      font-family: sans-serif;
+      background: #f0f0f0;
     }
 
     header {
-      background: rgba(0, 0, 0, 0.6);
-      padding: 15px;
-      text-align: center;
-    }
-
-    h1 {
-      margin: 0;
-      font-size: 2em;
-    }
-
-    nav {
-      margin-top: 10px;
-    }
-
-    button {
-      padding: 10px 20px;
-      margin: 10px;
-      font-size: 1em;
-      border: none;
-      border-radius: 5px;
-      background-color: #ff5252;
+      background-color: #003b9e;
       color: white;
-      cursor: pointer;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
 
-    main {
-      flex-grow: 1;
-    }
-
-    .cities {
-      text-align: center;
-      margin-top: 50px;
-    }
-
-    .modal {
-      display: none;
-      position: fixed;
-      z-index: 999;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0,0,0,0.6);
-    }
-
-    .modal-content {
-      background-color: #fff;
-      color: black;
-      margin: 15% auto;
-      padding: 20px;
-      border-radius: 10px;
-      width: 80%;
-      max-width: 400px;
-      text-align: center;
-    }
-
-    .close {
-      float: left;
-      font-size: 28px;
+    .nav-links a {
+      color: white;
+      margin: 0 15px;
+      text-decoration: none;
       font-weight: bold;
-      cursor: pointer;
     }
 
-    input {
-      padding: 10px;
-      width: 90%;
-      margin-top: 15px;
-      font-size: 1em;
+    .cta-buttons button {
+      background-color: red;
+      color: white;
+      border: none;
+      padding: 10px 15px;
       border-radius: 5px;
-      border: 1px solid #ccc;
+      cursor: pointer;
+      margin-right: 10px;
+    }
+
+    .hero {
+      background: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1950&q=80') no-repeat center center;
+      background-size: cover;
+      padding: 80px 20px;
+      text-align: center;
+      color: white;
+    }
+
+    .hero h1 {
+      font-size: 36px;
+      margin-bottom: 10px;
+    }
+
+    .search-box {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 30px;
+    }
+
+    .search-box input, .search-box select {
+      padding: 10px;
+      margin: 5px;
+      border-radius: 5px;
+      border: none;
+      min-width: 200px;
+    }
+
+    .search-box button {
+      background-color: #003b9e;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin: 5px;
+    }
+
+    .job-list {
+      max-width: 1100px;
+      margin: 40px auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .job-card {
+      background-color: #e6f0ff;
+      border: 1px solid #b3d1ff;
+      padding: 15px;
+      border-radius: 10px;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .job-card:hover {
+      transform: scale(1.02);
+      box-shadow: 0 4px 10px rgba(0, 59, 158, 0.3);
     }
 
     footer {
-      background: rgba(0,0,0,0.6);
-      color: #fff;
-      padding: 15px;
+      background-color: #222;
+      color: white;
       text-align: center;
-      font-size: 0.9em;
-      margin-top: auto;
+      padding: 20px;
+      font-size: 14px;
     }
 
     footer a {
       color: #ff5252;
+      margin: 0 10px;
       text-decoration: none;
-      margin: 0 8px;
     }
 
     footer a:hover {
       text-decoration: underline;
     }
+	
   </style>
 </head>
 <body>
-  <header>
-    <h1>دیوار</h1>
-	
+
+<header>
+  <div class="nav-links">
+    <a href="#">خانه</a>
+    <a href="#">دسته بندی</a>
+   <a href="ebs.html" class="go-to-kar-button"> لپتاپ استوک</a>
+    <a href="#">بلاگ</a>
+    <a href="#">تماس با ما</a>
+	<a href="kar.html" class="go-to-kar-button">🔍 مشاهده آگهی‌های کاریابی</a>
+
+  </div>
+  <div class="cta-buttons">
+    <button onclick="location.href='signup.html'">ثبت‌ نام</button>
+    <button onclick="location.href='login.html'">ورود</button>
+    <button onclick="location.href='profile.html'" style="background-color:red;">مشاهده اطلاعات پروفایل</button>
+  </div>
+</header>
+
+<div class="hero">
+  <h1>خرید و فروش واعلانات </h1>
+  <p>بزرگترین سایت خریدوفروش اجناس در افغانستان ...</p>
+
+  <div class="search-box">
+    <select id="category">
+      <option>همه دسته‌ها</option>
+      <option value="kar">اعلانات کاریابی</option>
+      <option>قطعات لپ‌تاپ و دسکتاپ</option>
+      <option>خدمات</option>
+      <option>رستوران‌ها بزرگ در حومه شهر</option>
+      <option>لپ‌تاپ استوک</option>
+      <option>موبایل و تبلت</option>
+    </select>
+    <input type="text" id="searchInput" placeholder="دنبال چه چیزی می‌گردید؟">
+    <input type="text" placeholder="مکان">
+    <button onclick="handleSearch()">جستجو 🔍</button>
+  </div>
 </div>
 
-    <nav>
-      <button id="postAdBtn">ثبت آگهی</button>
-  
-    </nav>
-  </header>
+<div id="jobSection" class="job-list"></div>
 
-  <main>
-    <p style="text-align: center;">لطفا شهر خود را انتخاب کنید:</p>
-    <div class="cities">
-      <button onclick="selectCity('کابل')">کابل</button>
-      <button onclick="selectCity('بلخ')">بلخ</button>
-      <button onclick="selectCity('هرات')">هرات</button>
-    </div>
-  </main>
+<footer>
+  <p>📞 تماس: +930700603752 | 📧 <a href="mailto:ehsancss2@gmail.com">ehsancss2@gmail.com</a></p>
+</footer>
 
-  <!-- مودال شماره تلفن -->
-  <div id="phoneModal" class="modal">
-    <div class="modal-content">
-      <span class="close" onclick="closeModal()">&times;</span>
-      <h2>لطفاً شماره تلفن خود را وارد کنید</h2>
-      <input type="text" id="phoneNumber" placeholder="مثلاً 09351234567">
-      <button onclick="submitPhone()">ادامه</button>
-    </div>
-  </div>
+<script>
+  function handleSearch() {
+    const category = document.getElementById("category").value;
+    const searchValue = document.getElementById("searchInput").value.toLowerCase();
 
-  <footer>
-    <p>📞 شماره تماس: +930700603752</p>
-    <p>📧 ایمیل: <a href="mailto:ehsancss2@gmail.com">ehsancss2@gmail.com</a></p>
-    <p>📘 فیسبوک: <a href="https://www.facebook.com/ehsanhamedi" target="_blank" rel="noopener noreferrer">ehsanhamedi</a></p>
-  </footer>
+    if (category === "kar" || searchValue.includes("کاریابی") || searchValue.includes("کار")) {
+      renderJobs();
+    } else {
+      alert("نتیجه‌ای یافت نشد یا دسته صحیح انتخاب نشده است.");
+    }
+  }
 
-  <script>
-    const postAdBtn = document.getElementById("postAdBtn");
-    const modal = document.getElementById("phoneModal");
+  function renderJobs() {
+    const jobSection = document.getElementById("jobSection");
+    const jobs = JSON.parse(localStorage.getItem("jobs") || "[]");
 
-    postAdBtn.onclick = function () {
-      modal.style.display = "block";
+    if (jobs.length === 0) {
+      jobSection.innerHTML = "<p style='text-align:center'>هیچ آگهی کاریابی ثبت نشده است.</p>";
+      return;
     }
 
-    function closeModal() {
-      modal.style.display = "none";
-    }
+    jobSection.innerHTML = "";
+    jobs.forEach(job => {
+      const div = document.createElement("div");
+      div.className = "job-card";
+      div.innerHTML = `
+        <h3>${job.title}</h3>
+        <p>${job.description}</p>
+        ${job.image ? `<img src="${job.image}" style="max-width:100%; border-radius:8px">` : ""}
+      `;
+      jobSection.appendChild(div);
+    });
+  }
+</script>
 
-    function submitPhone() {
-      const phone = document.getElementById("phoneNumber").value;
-      if (phone.length >= 10) {
-        window.location.href = "ads.html";
-      } else {
-        alert("لطفاً شماره معتبر وارد کنید.");
-      }
-    }
-
-    function selectCity(city) {
-      alert("شهر انتخاب شده: " + city);
-      // می‌تونی بعداً شهر رو به صورت localStorage ذخیره کنی
-    }
-  </script>
 </body>
 </html>

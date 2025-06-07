@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>آگهی‌های کاری</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background: #f5f5f5;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    form {
+      background: white;
+      padding: 15px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      max-width: 500px;
+      margin: 0 auto 20px auto;
+    }
+
+    input, textarea {
+      padding: 10px;
+      font-size: 1em;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    button {
+      background-color: #d32f2f;
+      color: white;
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1em;
+    }
+
+    .job-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+    }
+
+    .job-card {
+      background: white;
+      padding: 10px;
+      width: 200px;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .job-card img {
+      max-width: 100%;
+      border-radius: 5px;
+      margin-top: 10px;
+    }
+
+    .delete-btn {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: #e53935;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .delete-btn:hover {
+      background: #b71c1c;
+    }
+  </style>
+</head>
+<body>
+  <h1>اعلانات کاریابی</h1>
+
+  <form id="jobForm">
+    <textarea id="jobText" placeholder="متن آگهی کاری..." required></textarea>
+    <input type="file" id="jobImage" accept="image/*">
+    <button type="submit">ثبت آگهی</button>
+  </form>
+
+  <div id="jobList" class="job-grid"></div>
+
+  <script>
+    const jobForm = document.getElementById("jobForm");
+    const jobList = document.getElementById("jobList");
+
+    function loadJobs() {
+      const jobs = JSON.parse(localStorage.getItem("jobs") || "[]");
+      jobList.innerHTML = "";
+      jobs.forEach((job, index) => {
+        const div = document.createElement("div");
+        div.className = "job-card";
+        div.innerHTML = `
+          <button class="delete-btn" onclick="deleteJob(${index})">×</button>
+          <p>${job.text}</p>
+          ${job.image ? `<img src="${job.image}" alt="job image">` : ""}
+        `;
+        jobList.appendChild(div);
+      });
+    }
+
+    jobForm.onsubmit = function(e) {
+      e.preventDefault();
+      const text = document.getElementById("jobText").value.trim();
+      const file = document.getElementById("jobImage").files[0];
+
+      if (!text) return alert("متن آگهی را وارد کنید.");
+
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(event) {
+          saveJob(text, event.target.result);
+        };
+        reader.readAsDataURL(file);
+      } else {
+        saveJob(text, null);
+      }
+
+      jobForm.reset();
+    };
+
+    function saveJob(text, image) {
+      const jobs = JSON.parse(localStorage.getItem("jobs") || "[]");
+      jobs.unshift({ text, image });
+      localStorage.setItem("jobs", JSON.stringify(jobs));
+      loadJobs();
+    }
+
+    function deleteJob(index) {
+      const jobs = JSON.parse(localStorage.getItem("jobs") || "[]");
+      jobs.splice(index, 1);
+      localStorage.setItem("jobs", JSON.stringify(jobs));
+      loadJobs();
+    }
+
+    loadJobs();
+  </script>
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>ورود</title>
+  <style>
+    body {
+      background-color: #e6f0ff;
+      font-family: sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      background-color: white;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 4px 12px rgba(0, 59, 158, 0.2);
+      width: 350px;
+    }
+
+    h2 {
+      text-align: center;
+      color: #003b9e;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 12px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      background-color: #003b9e;
+      color: white;
+      border: none;
+      padding: 12px;
+      width: 100%;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #005ce6;
+    }
+
+    .link {
+      display: block;
+      margin-top: 15px;
+      text-align: center;
+      color: #003b9e;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2>ورود</h2>
+  <input type="email" id="email" placeholder="ایمیل">
+  <input type="password" id="password" placeholder="رمز عبور">
+  <button onclick="login()">ورود</button>
+  <a href="signup.html" class="link">ثبت‌نام</a>
+</div>
+
+<script>
+  function login() {
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value.trim();
+
+    const user = JSON.parse(localStorage.getItem("user"));
+
+    if (!user) {
+      alert("کاربری پیدا نشد، لطفاً ثبت‌نام کنید.");
+      return;
+    }
+
+    if (email === user.email && password === user.password) {
+      alert("خوش آمدید " + user.name + "!");
+      window.location.href = "index.html";
+    } else {
+      alert("ایمیل یا رمز اشتباه است.");
+    }
+  }
+</script>
+
+</body>
+</html>

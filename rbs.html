@@ -1,0 +1,72 @@
+<!-- rbs.html -->
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>ثبت آگهی</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 20px;
+      background: #f5f5f5;
+    }
+    input, textarea, select {
+      display: block;
+      width: 100%;
+      margin-bottom: 15px;
+      padding: 10px;
+      font-size: 1rem;
+    }
+    button {
+      background: red;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      border-radius: 6px;
+    }
+  </style>
+</head>
+<body>
+  <h2>ثبت آگهی جدید</h2>
+
+  <input type="text" id="title" placeholder="عنوان آگهی">
+  <input type="text" id="price" placeholder="قیمت (مثلاً ۱۵۰۰۰)">
+  <textarea id="description" placeholder="توضیحات آگهی"></textarea>
+  <input type="text" id="location" placeholder="مکان (مثلاً کابل)">
+  <input type="text" id="image" placeholder="لینک عکس (اختیاری)">
+
+  <button onclick="saveAd()">ذخیره آگهی</button>
+
+  <script>
+    function saveAd() {
+      const title = document.getElementById('title').value;
+      const price = document.getElementById('price').value;
+      const description = document.getElementById('description').value;
+      const location = document.getElementById('location').value;
+      const image = document.getElementById('image').value || 'https://source.unsplash.com/250x160/?random';
+
+      if (!title || !price || !location) {
+        alert("لطفاً تمام فیلدها را پر کنید.");
+        return;
+      }
+
+      const ad = {
+        title,
+        price,
+        description,
+        location,
+        image
+      };
+
+      const ads = JSON.parse(localStorage.getItem("userAds") || "[]");
+      ads.push(ad);
+      localStorage.setItem("userAds", JSON.stringify(ads));
+
+      alert("آگهی با موفقیت ذخیره شد!");
+      window.location.href = "ads.html";
+    }
+  </script>
+</body>
+</html>

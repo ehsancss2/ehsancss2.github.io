@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <title>افزودن لپتاپ استوک</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 0;
+      padding: 0;
+      background: url('images/galaxy.jpg') no-repeat center center fixed;
+      background-size: cover;
+      color: #fff;
+    }
+    h1 {
+      text-align: center;
+      padding: 20px 0;
+      background-color: rgba(0, 0, 50, 0.7);
+      margin: 0;
+    }
+    .container {
+      max-width: 600px;
+      margin: 30px auto;
+      background-color: rgba(0, 0, 50, 0.85);
+      padding: 20px;
+      border-radius: 12px;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+    }
+    input[type="file"] {
+      background-color: #fff;
+    }
+    button {
+      background-color: #00bfff;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+    button:hover {
+      background-color: #009acd;
+    }
+    .laptop-list {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      padding: 20px;
+    }
+    .laptop-card {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.4);
+      width: 260px;
+      color: #333;
+      overflow: hidden;
+      position: relative;
+      transition: transform 0.3s;
+    }
+    .laptop-card:hover {
+      transform: scale(1.05);
+    }
+    .laptop-card img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+    }
+    .laptop-info {
+      padding: 15px;
+    }
+    .laptop-info ul {
+      text-align: right;
+      padding-right: 20px;
+    }
+    .remove-btn {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background-color: crimson;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      padding: 5px 10px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+<h1>افزودن لپتاپ جدید</h1>
+
+<div class="container">
+  <input type="text" id="name" placeholder="نام لپتاپ" />
+  <input type="text" id="price" placeholder="قیمت (افغانی)" />
+  <textarea id="specs" placeholder="مشخصات هر کدام در خط جدید بنویسید"></textarea>
+  <input type="file" id="imageUpload" accept="image/*" />
+  <button onclick="addLaptop()">افزودن لپتاپ</button>
+</div>
+
+<div class="laptop-list" id="laptopList"></div>
+
+<script>
+  const laptopList = document.getElementById("laptopList");
+
+  // بارگذاری اولیه از localStorage
+  window.onload = function () {
+    const savedLaptops = JSON.parse(localStorage.getItem("laptops")) || [];
+    savedLaptops.forEach(createLaptopCard);
+  };
+
+  function addLaptop() {
+    const name = document.getElementById("name").value.trim();
+    const price = document.getElementById("price").value.trim();
+    const specs = document.getElementById("specs").value.trim().split('\n');
+    const imageUpload = document.getElementById("imageUpload").files[0];
+
+    if (!name || !price || !imageUpload) {
+      alert("همه فیلدها را پر کنید.");
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      const newLaptop = {
+        id: Date.now(),
+        name,
+        price,
+        specs,
+        image: e.target.result
+      };
+      const laptops = JSON.parse(localStorage.getItem("laptops")) || [];
+      laptops.push(newLaptop);
+      localStorage.setItem("laptops", JSON.stringify(laptops));
+      createLaptopCard(newLaptop);
+    };
+    reader.readAsDataURL(imageUpload);
+
+    // پاک کردن فرم
+    document.getElementById("name").value = '';
+    document.getElementById("price").value = '';
+    document.getElementById("specs").value = '';
+    document.getElementById("imageUpload").value = '';
+  }
+
+  function createLaptopCard(laptop) {
+    const card = document.createElement("div");
+    card.className = "laptop-card";
+    card.innerHTML = `
+      <img src="${laptop.image}" alt="${laptop.name}" />
+      <div class="laptop-info">
+        <strong>${laptop.name}</strong>
+        <div style="color:#00bfff;font-weight:bold;">${laptop.price} افغانی</div>
+        <ul>${laptop.specs.map(s => `<li>${s}</li>`).join('')}</ul>
+      </div>
+      <button class="remove-btn" onclick="removeLaptop(${laptop.id}, this)">حذف</button>
+    `;
+    laptopList.appendChild(card);
+  }
+
+  function removeLaptop(id, btn) {
+    btn.parentElement.remove();
+    let laptops = JSON.parse(localStorage.getItem("laptops")) || [];
+    laptops = laptops.filter(l => l.id !== id);
+    localStorage.setItem("laptops", JSON.stringify(laptops));
+  }
+</script>
+
+</body>
+</html>

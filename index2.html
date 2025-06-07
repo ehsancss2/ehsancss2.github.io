@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>دیوار ساده | آگهی رایگان</title>
+
+  <meta name="description" content="ثبت آگهی رایگان و خرید و فروش در کابل، بلخ و هرات.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Google reCAPTCHA -->
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 0;
+      padding: 0;
+      background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1950&q=80');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    header {
+      background: rgba(0, 0, 0, 0.6);
+      padding: 15px;
+      text-align: center;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 2em;
+    }
+
+    nav {
+      margin-top: 10px;
+    }
+
+    button {
+      padding: 10px 20px;
+      margin: 10px;
+      font-size: 1em;
+      border: none;
+      border-radius: 5px;
+      background-color: #ff5252;
+      color: white;
+      cursor: pointer;
+    }
+
+    main {
+      flex-grow: 1;
+      padding: 20px;
+    }
+
+    .cities, .categories, .search-box {
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 999;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.6);
+    }
+
+    .modal-content {
+      background-color: #fff;
+      color: black;
+      margin: 15% auto;
+      padding: 20px;
+      border-radius: 10px;
+      width: 80%;
+      max-width: 400px;
+      text-align: center;
+    }
+
+    .close {
+      float: left;
+      font-size: 28px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    input, select {
+      padding: 10px;
+      width: 90%;
+      margin-top: 15px;
+      font-size: 1em;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    .search-box input {
+      width: 60%;
+    }
+
+    .search-box button {
+      margin-top: 10px;
+    }
+
+    footer {
+      background: rgba(0,0,0,0.6);
+      color: #fff;
+      padding: 15px;
+      text-align: center;
+      font-size: 0.9em;
+      margin-top: auto;
+    }
+
+    footer a {
+      color: #ff5252;
+      text-decoration: none;
+      margin: 0 8px;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>دیوار</h1>
+    <nav>
+      <button id="postAdBtn">ثبت آگهی</button>
+    </nav>
+  </header>
+
+  <main>
+    <p style="text-align: center;">لطفا شهر خود را انتخاب کنید:</p>
+    <div class="cities">
+      <button onclick="selectCity('کابل')">کابل</button>
+      <button onclick="selectCity('بلخ')">بلخ</button>
+      <button onclick="selectCity('هرات')">هرات</button>
+    </div>
+
+    <div class="categories">
+      <h3>دسته‌بندی‌ها:</h3>
+      <button>قطعات لپ‌تاپ و دسکتاپ</button>
+      <button>خدمات</button>
+      <button>رستوران‌ها بزرگ در حومه شهر</button>
+      <button>لپ‌تاپ استوک</button>
+      <button>موبایل و تبلت</button>
+      <button>اعلانات کاریابی</button>
+    </div>
+
+    <div class="search-box">
+      <h3>جستجو:</h3>
+      <input type="text" id="searchInput" placeholder="مثلاً: کاریابی، موبایل، لپ‌تاپ">
+      <br>
+      <button onclick="handleSearch()">جستجو 🔍</button>
+    </div>
+  </main>
+
+  <!-- مودال شماره تلفن -->
+  <div id="phoneModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <h2>لطفاً شماره تلفن خود را وارد کنید</h2>
+      <input type="text" id="phoneNumber" placeholder="مثلاً 09351234567">
+      <button onclick="submitPhone()">ادامه</button>
+      <div class="g-recaptcha" data-sitekey="SITE_KEY_YOU_GOT_FROM_GOOGLE"></div>
+    </div>
+  </div>
+
+  <footer>
+    <p>📞 شماره تماس: +930700603752</p>
+    <p>📧 ایمیل: <a href="mailto:ehsancss2@gmail.com">ehsancss2@gmail.com</a></p>
+    <p>📘 فیسبوک: <a href="https://www.facebook.com/ehsanhamedi" target="_blank" rel="noopener noreferrer">ehsanhamedi</a></p>
+  </footer>
+
+  <script>
+    const postAdBtn = document.getElementById("postAdBtn");
+    const modal = document.getElementById("phoneModal");
+
+    postAdBtn.onclick = function () {
+      modal.style.display = "block";
+    }
+
+    function closeModal() {
+      modal.style.display = "none";
+    }
+
+    function submitPhone() {
+      const phone = document.getElementById("phoneNumber").value;
+      if (phone.length >= 10) {
+        window.location.href = "ads.html";
+      } else {
+        alert("لطفاً شماره معتبر وارد کنید.");
+      }
+    }
+
+    function selectCity(city) {
+      alert("شهر انتخاب شده: " + city);
+      // در آینده: ذخیره در localStorage
+    }
+
+    function handleSearch() {
+      const searchValue = document.getElementById("searchInput").value.toLowerCase();
+      if (searchValue.includes("کاریابی") || searchValue.includes("کار")) {
+        window.location.href = "kar.html";
+      } else {
+        alert("جستجو برای: " + searchValue);
+      }
+    }
+  </script>
+</body>
+</html>

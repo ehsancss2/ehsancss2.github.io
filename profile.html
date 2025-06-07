@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>پروفایل کاربر</title>
+  <style>
+    body {
+      background-color: #e6f0ff;
+      font-family: sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      background-color: white;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 4px 12px rgba(0, 59, 158, 0.2);
+      width: 400px;
+    }
+
+    h2 {
+      text-align: center;
+      color: #003b9e;
+    }
+
+    label {
+      font-weight: bold;
+      margin-top: 10px;
+      display: block;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      background-color: #003b9e;
+      color: white;
+      border: none;
+      padding: 12px;
+      width: 100%;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #005ce6;
+    }
+
+    .back-link {
+      text-align: center;
+      margin-top: 15px;
+    }
+
+    .back-link a {
+      text-decoration: none;
+      color: #003b9e;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2>پروفایل کاربر</h2>
+
+  <label for="name">نام:</label>
+  <input type="text" id="name">
+
+  <label for="lastname">نام خانوادگی:</label>
+  <input type="text" id="lastname">
+
+  <label for="email">ایمیل:</label>
+  <input type="email" id="email">
+
+  <label for="password">رمز عبور:</label>
+  <input type="password" id="password">
+
+  <button onclick="saveProfile()">ذخیره تغییرات</button>
+
+  <div class="back-link">
+    <a href="index.html">⬅ بازگشت به صفحه اصلی</a>
+  </div>
+</div>
+
+<script>
+  // لود اطلاعات
+  const user = JSON.parse(localStorage.getItem("user"));
+
+  if (!user) {
+    alert("کاربری یافت نشد. لطفاً ابتدا ثبت‌نام یا ورود انجام دهید.");
+    window.location.href = "signup.html";
+  } else {
+    document.getElementById("name").value = user.name;
+    document.getElementById("lastname").value = user.lastname;
+    document.getElementById("email").value = user.email;
+    document.getElementById("password").value = user.password;
+  }
+
+  function saveProfile() {
+    const name = document.getElementById("name").value.trim();
+    const lastname = document.getElementById("lastname").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value.trim();
+
+    if (!name || !lastname || !email || !password) {
+      alert("لطفاً همه فیلدها را پر کنید.");
+      return;
+    }
+
+    const updatedUser = { name, lastname, email, password };
+    localStorage.setItem("user", JSON.stringify(updatedUser));
+    alert("اطلاعات با موفقیت ذخیره شد.");
+  }
+</script>
+
+</body>
+</html>

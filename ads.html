@@ -48,6 +48,23 @@
       border: 1px solid #ccc;
       border-radius: 8px;
     }
+
+    /* دکمه ثبت آگهی */
+    .post-ad-btn {
+      background-color: #e53935;
+      color: white;
+      border: none;
+      padding: 15px 40px;
+      font-size: 20px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      margin-bottom: 20px;
+    }
+
+    .post-ad-btn:hover {
+      background-color: #008000;
+    }
   </style>
 </head>
 <body>
@@ -57,10 +74,20 @@
 
   <!-- فیلتر دسته‌بندی -->
   <section class="filters">
+    <<div style="text-align: center; margin-bottom: 20px;">
+  <a href="rbs.html">
+    <button id="postAdBtn" class="post-ad-btn">ثبت آگهی</button>
+  </a>
+  <a href="ag.html">
+  <button class="post-ad-btn">آگهی‌ها</button>
+</a>
+
+</div>
+
+
     <div class="category" onclick="filterCategory('digital')">کالای دیجیتال</div>
     <div class="subcategory" onclick="filterSub('mobile')">موبایل</div>
     <div class="subcategory" onclick="filterSub('tablet')">تبلت</div>
-    <div class="subcategory" onclick="filterSub('laptop')">لپ‌تاپ</div>
     <div class="subcategory" onclick="filterSub('desktop')">دسکتاپ</div>
 
     <div class="category" onclick="filterCategory('jobs')">استخدام و کاریابی</div>
@@ -75,15 +102,32 @@
   <main>
     <div class="ads">
       <!-- آگهی‌ها -->
-      <div class="ad-card digital mobile">📱 فروش موبایل سامسونگ - ۱۰,۰۰۰ افغانی</div>
-      <div class="ad-card digital laptop">💻 لپ‌تاپ استوک - ۱۵,۰۰۰ افغانی</div>
-      <div class="ad-card digital desktop">🖥 دسکتاپ گیمینگ - ۲۰,۰۰۰ افغانی</div>
-      <div class="ad-card digital tablet">📱 آیپد نسل ۷ - ۱۶,۰۰۰ افغانی</div>
+	</a>
+	  <a href="kar.html">
+  <button class="post-ad-btn">  قطعات لپ‌تاپ و دسکتاپ</button>
+</a>
+</a>
+      <a href="ebs.html">
+  <button class="post-ad-btn"> خدمات</button>
+</a>
+</a>
+      <a href="ebs.html">
+  <button class="post-ad-btn"> رستوران ها بزرگ در حومه شهر</button>
+</a>
       
-      <div class="ad-card jobs marketing">🧑‍💼 استخدام بازاریاب در کابل</div>
-      <div class="ad-card jobs restaurant">🍽 استخدام صندوق‌دار برای رستوران</div>
-      <div class="ad-card jobs service">🛠 خدمات برق‌کاری در محل</div>
-      <div class="ad-card jobs education">📚 استخدام استاد انگلیسی</div>
+      
+
+  <a href="ebs.html">
+  <button class="post-ad-btn"> لپ‌تاپ استوک</button>
+</a>
+      <a href="ebs.html">
+  <button class="post-ad-btn"> موبایل وتبلت</button>
+</a>
+	  <a href="kar.html">
+  <button class="post-ad-btn">🧑‍💼 اعلانات کاریابی</button>
+</a>
+            <div class="ad-card digital laptop">💻 برای اطلاعات بیشتر با ما در تماس باشید</div>
+      
     </div>
   </main>
 
@@ -115,6 +159,12 @@
       cards.forEach(card => {
         card.style.display = 'block';
       });
+    }
+
+    document.getElementById("postAdBtn").onclick = function () {
+      alert("فرم ثبت آگهی هنوز پیاده‌سازی نشده است.");
+      // یا مثلاً:
+      // window.location.href = "post.html";
     }
   </script>
 </body>
